@@ -3,6 +3,9 @@
    xmlns:browser="http://namespaces.zope.org/browser"
    i18n_domain="zope">
 
+  <include package="zope.component" file="meta.zcml" />
+  <include package="zope.browserpage" file="meta.zcml" />
+
   <!-- Source Type Vocabulary Setup -->
 
   <utility
