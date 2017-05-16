@@ -12,15 +12,16 @@
 #
 ##############################################################################
 """Plain Text Renderer Classes
-
-$Id$
 """
 __docformat__ = 'restructuredtext'
 
-import cgi
+try:
+    from html import escape
+except ImportError:
+    from cgi import escape
 
-from zope.component import adapts
-from zope.interface import implements
+from zope.component import adapter
+from zope.interface import implementer
 from zope.publisher.browser import BrowserView
 from zope.publisher.interfaces.browser import IBrowserRequest
 
@@ -37,20 +38,25 @@ PlainTextSourceFactory = SourceFactory(
     IPlainTextSource, _("Plain Text"), _("Plain Text Source"))
 
 
+@implementer(IHTMLRenderer)
+@adapter(IPlainTextSource, IBrowserRequest)
 class PlainTextToHTMLRenderer(BrowserView):
     r"""A view to convert from Plain Text to HTML.
 
     Example::
 
       >>> from zope.publisher.browser import TestRequest
+      >>> from zope.app.renderer import text_type
       >>> source = PlainTextSourceFactory(u'I hear that 1 > 2.\n')
       >>> renderer = PlainTextToHTMLRenderer(source, TestRequest())
-      >>> renderer.render()
-      u'I hear that 1 &gt; 2.<br />\n'
+      >>> rendered = renderer.render()
+      >>> isinstance(rendered, text_type)
+      True
+      >>> print(rendered)
+      I hear that 1 &gt; 2.<br />
+      <BLANKLINE>
     """
-    implements(IHTMLRenderer)
-    adapts(IPlainTextSource, IBrowserRequest)
 
     def render(self):
         "See zope.app.interfaces.renderer.IHTMLRenderer"
-        return cgi.escape(self.context).replace('\n', '<br />\n')
+        return escape(self.context, True).replace('\n', '<br />\n')

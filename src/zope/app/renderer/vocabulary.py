@@ -13,7 +13,6 @@
 ##############################################################################
 """Vocabulary for the Source Type Registry
 
-$Id$
 """
 import zope.component
 from zope.interface import alsoProvides
@@ -23,7 +22,8 @@ from zope.app.renderer.interfaces import ISource
 
 def SourceTypeVocabulary(context):
     return SimpleVocabulary(
-        [SimpleTerm(name, title=factory.title) for name, factory in 
-         zope.component.getFactoriesFor(ISource)])
+        [SimpleTerm(name, title=factory.title)
+         for name, factory
+         in zope.component.getFactoriesFor(ISource)])
 
 alsoProvides(SourceTypeVocabulary, IVocabularyFactory)

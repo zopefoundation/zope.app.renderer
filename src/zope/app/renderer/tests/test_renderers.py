@@ -13,17 +13,19 @@
 ##############################################################################
 """Renderer Tests
 
-$Id$
 """
 import unittest
-from zope.testing.doctestunit import DocTestSuite
+import doctest
+from doctest import DocTestSuite
 
 def test_suite():
+    options = doctest.ELLIPSIS
     return unittest.TestSuite((
         DocTestSuite('zope.app.renderer.plaintext'),
         DocTestSuite('zope.app.renderer.rest'),
-        DocTestSuite('zope.app.renderer.stx'),
-        ))
+        DocTestSuite('zope.app.renderer.stx',
+                     optionflags=options),
+    ))
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

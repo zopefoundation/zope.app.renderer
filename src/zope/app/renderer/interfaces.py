@@ -14,9 +14,8 @@
 """Renderer Interface Declarations
 
 The source renderer takes a special type of string, an ISource, and is able to
-produce 
+produce a different format.
 
-$Id$
 """
 from zope.interface import Interface
 
@@ -29,7 +28,7 @@ class ISourceRenderer(Interface):
 
     This is the base class for all possible output types."""
 
-    def __init__(self, source):
+    def __init__( source):
         """Initialize the renderer.
 
         The source argument is the source code that needs to be converted.
