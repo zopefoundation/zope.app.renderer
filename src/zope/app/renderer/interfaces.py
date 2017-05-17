@@ -28,7 +28,7 @@ class ISourceRenderer(Interface):
 
     This is the base class for all possible output types."""
 
-    def __init__( source):
+    def __init__(source):
         """Initialize the renderer.
 
         The source argument is the source code that needs to be converted.
