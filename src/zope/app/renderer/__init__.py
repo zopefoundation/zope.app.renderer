@@ -13,20 +13,23 @@
 ##############################################################################
 """Plain Text Renderer Classes
 
-$Id$
 """
 from zope.component.interfaces import IFactory
-from zope.interface import implements, directlyProvides, Declaration
-from interfaces import ISource, IHTMLRenderer
+from zope.interface import implementer, directlyProvides, Declaration
+from zope.app.renderer.interfaces import ISource, IHTMLRenderer # pylint:disable=unused-import
 
+try:
+    text_type = unicode
+except NameError:
+    text_type = str
 
-class Source(unicode):
+class Source(text_type):
     __provides__ = None
 
 
+@implementer(IFactory)
 class SourceFactory(object):
     """Creates an ISource object."""
-    implements(IFactory)
 
     def __init__(self, iface, title='', description=''):
         self._iface = iface

@@ -1,15 +1,24 @@
-=======
-CHANGES
-=======
+=========
+ CHANGES
+=========
+
+4.0.0 (unreleased)
+==================
+
+- Add support for Python 3.4, 3.5, 3.6 and PyPy.
+
+- Remove dependency on ``zope.app.testing``.
+
+- Use the standard library ``doctest`` module.
 
 3.5.1 (2009-07-21)
-------------------
+==================
 
-- Require the new `roman` package, since docutils does not install it
+- Require the new ``roman`` package, since docutils does not install it
   correctly.
 
 3.5.0 (2009-01-17)
-------------------
+==================
 
 - Adapted to docutils 0.5 for ReST rendering: get rid of the
   ZopeTranslator class, because docutils changed the way it
@@ -22,6 +31,6 @@ CHANGES
 - Replaced __used_for__ with zope.component.adapts calls.
 
 3.4.0 (2007-10-27)
-------------------
+==================
 
 - Initial release independent of the main Zope tree.

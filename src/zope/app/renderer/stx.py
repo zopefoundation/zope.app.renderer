@@ -13,14 +13,13 @@
 ##############################################################################
 """Structured Text Renderer Classes
 
-$Id$
 """
 __docformat__ = 'restructuredtext'
 
 import re
 
-from zope.component import adapts
-from zope.interface import implements
+from zope.component import adapter
+from zope.interface import implementer
 from zope.structuredtext.document import Document
 from zope.structuredtext.html import HTML
 from zope.publisher.browser import BrowserView
@@ -41,35 +40,46 @@ StructuredTextSourceFactory = SourceFactory(
     _("Structured Text (STX) Source"))
 
 
+@implementer(IHTMLRenderer)
+@adapter(IStructuredTextSource, IBrowserRequest)
 class StructuredTextToHTMLRenderer(BrowserView):
     r"""A view to convert from Plain Text to HTML.
 
     Example::
 
+      >>> from zope.app.renderer import text_type
       >>> from zope.publisher.browser import TestRequest
       >>> source = StructuredTextSourceFactory(u'This is source.')
       >>> renderer = StructuredTextToHTMLRenderer(source, TestRequest())
-      >>> renderer.render()
-      u'<p>This is source.</p>\n'
+      >>> rendered = renderer.render()
+      >>> isinstance(rendered, text_type)
+      True
+      >>> print(rendered)
+      <p>This is source.</p>
+      <BLANKLINE>
 
     Make sure that unicode works as well::
 
       >>> source = StructuredTextSourceFactory(u'This is \xc3\x9c.')
       >>> renderer = StructuredTextToHTMLRenderer(source, TestRequest())
-      >>> renderer.render()
-      u'<p>This is \xc3\x9c.</p>\n'
+      >>> rendered = renderer.render()
+      >>> isinstance(rendered, text_type)
+      True
+      >>> print(rendered)
+      <p>This is ...</p>
+      <BLANKLINE>
     """
-    implements(IHTMLRenderer)
-    adapts(IStructuredTextSource, IBrowserRequest)
 
     def render(self):
         "See zope.app.interfaces.renderer.IHTMLRenderer"
-        encoded = self.context.encode('UTF-8')
-        doc = Document()(encoded)
+
+        doc = Document()(self.context)
         html = HTML()(doc)
 
         # strip html & body added by some zope versions
         html = re.sub(
-            r'(?sm)^<html.*<body.*?>\n(.*)</body>\n</html>\n',r'\1', html)
+            r'(?sm)^<html.*<body.*?>\n(.*)</body>\n</html>\n',
+            r'\1',
+            html)
 
-        return html.decode('UTF-8')
+        return html

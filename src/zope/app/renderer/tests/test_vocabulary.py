@@ -13,16 +13,16 @@
 ##############################################################################
 """Tests for Renderer Vocabulary.
 
-$Id$
+
 """
 import unittest
 
-from zope.app.testing import ztapi
+from zope import component as ztapi
 from zope.app.renderer import SourceFactory
 from zope.app.renderer.interfaces import ISource
 from zope.app.renderer.vocabulary import SourceTypeVocabulary
 from zope.component.interfaces import IFactory
-from zope.app.testing.placelesssetup import PlacelessSetup
+from zope.component.testing import PlacelessSetup
 from zope.schema.interfaces import IVocabulary, IVocabularyTokenized
 
 
@@ -36,30 +36,30 @@ class IFoo2(ISource):
 
 Foo2Factory = SourceFactory(IFoo2, 'Foo2', 'Foo2 Source')
 
-# The vocabulary uses SimpleVocabulary now, so these tests are a bit 
-# redundant.  Leaving them in as confirmation that the replacement function 
+# The vocabulary uses SimpleVocabulary now, so these tests are a bit
+# redundant.  Leaving them in as confirmation that the replacement function
 # works identically to the old custom vocabulary.
 class SourceTypeVocabularyTest(PlacelessSetup, unittest.TestCase):
 
     def setUp(self):
         super(SourceTypeVocabularyTest, self).setUp()
-        ztapi.provideUtility(IFactory, FooFactory, 'zope.source.Foo')
-        ztapi.provideUtility(IFactory, Foo2Factory, 'zope.source.Foo2')
+        ztapi.provideUtility(FooFactory, IFactory, 'zope.source.Foo')
+        ztapi.provideUtility(Foo2Factory, IFactory, 'zope.source.Foo2')
         self.vocab = SourceTypeVocabulary(None)
 
     def test_Interface(self):
-        self.failUnless(IVocabulary.providedBy(self.vocab))
-        self.failUnless(IVocabularyTokenized.providedBy(self.vocab))
+        self.assertTrue(IVocabulary.providedBy(self.vocab))
+        self.assertTrue(IVocabularyTokenized.providedBy(self.vocab))
 
     def test_contains(self):
-        self.failUnless('zope.source.Foo' in self.vocab)
-        self.failIf('zope.source.Foo3' in self.vocab)
+        self.assertIn('zope.source.Foo', self.vocab)
+        self.assertNotIn('zope.source.Foo3', self.vocab)
 
     def test_iter(self):
-        self.failUnless(
-            'zope.source.Foo' in [term.value for term in self.vocab])
-        self.failIf(
-            'zope.source.Foo3' in [term.value for term in iter(self.vocab)])
+        self.assertIn(
+            'zope.source.Foo', [term.value for term in self.vocab])
+        self.assertNotIn(
+            'zope.source.Foo3', [term.value for term in iter(self.vocab)])
 
     def test_len(self):
         self.assertEqual(len(self.vocab), 2)
@@ -75,10 +75,9 @@ class SourceTypeVocabularyTest(PlacelessSetup, unittest.TestCase):
         self.assertRaises(
             LookupError, vocab.getTermByToken, ('zope.source.Foo3',))
 
+
 def test_suite():
-    return unittest.TestSuite((
-        unittest.makeSuite(SourceTypeVocabularyTest),
-        ))
+    return unittest.defaultTestLoader.loadTestsFromName(__name__)
 
 if __name__ == '__main__':
     unittest.main()
