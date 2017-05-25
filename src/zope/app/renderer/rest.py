@@ -103,7 +103,8 @@ class ReStructuredTextToHTMLRenderer(BrowserView):
         """
         # default settings for the renderer
         overrides = {
-            'halt_level': 6,
+            'halt_level': 6, # don't stop for any errors
+            'report_level': 4, # only report severe errors
             'input_encoding': 'unicode',
             'output_encoding': 'unicode',
             'initial_header_level': 3,
