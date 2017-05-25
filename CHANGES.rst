@@ -6,9 +6,9 @@
 ==================
 
 - Raise the docutils ReST error report level from its default of
-  ``error`` to ``severe``. An error report level issued for directives
+  ``error`` to ``severe``. An error-level report is issued for directives
   that are unknown, such as ``:class:``, which are increasingly common
-  due to the use of Sphinx. This change prevents an error being
+  due to the use of Sphinx. This change prevents such an error being
   printed on stderr as well as rendered in the HTML.
 
 
