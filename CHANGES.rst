@@ -2,7 +2,7 @@
  CHANGES
 =========
 
-4.0.1 (unreleased)
+4.1.0 (2017-05-25)
 ==================
 
 - Raise the docutils ReST error report level from its default of
