@@ -16,12 +16,14 @@
 """
 from zope.component.interfaces import IFactory
 from zope.interface import implementer, directlyProvides, Declaration
-from zope.app.renderer.interfaces import ISource, IHTMLRenderer # pylint:disable=unused-import
+from zope.app.renderer.interfaces import ISource  # noqa: F401 import unused
+from zope.app.renderer.interfaces import IHTMLRenderer   # noqa: F401 unused
 
 try:
     text_type = unicode
 except NameError:
     text_type = str
+
 
 class Source(text_type):
     __provides__ = None

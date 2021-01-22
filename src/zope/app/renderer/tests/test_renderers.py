@@ -18,6 +18,7 @@ import unittest
 import doctest
 from doctest import DocTestSuite
 
+
 def test_suite():
     options = doctest.ELLIPSIS
     return unittest.TestSuite((
@@ -26,6 +27,7 @@ def test_suite():
         DocTestSuite('zope.app.renderer.stx',
                      optionflags=options),
     ))
+
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

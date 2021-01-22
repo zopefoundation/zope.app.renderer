@@ -35,6 +35,7 @@ class IStructuredTextSource(ISource):
     implementation of this interface should always derive from unicode or
     behave like a unicode class."""
 
+
 StructuredTextSourceFactory = SourceFactory(
     IStructuredTextSource, _("Structured Text (STX)"),
     _("Structured Text (STX) Source"))

@@ -29,16 +29,21 @@ from zope.schema.interfaces import IVocabulary, IVocabularyTokenized
 class IFoo(ISource):
     """Source marker interface"""
 
+
 FooFactory = SourceFactory(IFoo, 'Foo', 'Foo Source')
+
 
 class IFoo2(ISource):
     """Source marker interface"""
+
 
 Foo2Factory = SourceFactory(IFoo2, 'Foo2', 'Foo2 Source')
 
 # The vocabulary uses SimpleVocabulary now, so these tests are a bit
 # redundant.  Leaving them in as confirmation that the replacement function
 # works identically to the old custom vocabulary.
+
+
 class SourceTypeVocabularyTest(PlacelessSetup, unittest.TestCase):
 
     def setUp(self):
@@ -78,6 +83,7 @@ class SourceTypeVocabularyTest(PlacelessSetup, unittest.TestCase):
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
+
 
 if __name__ == '__main__':
     unittest.main()
