@@ -19,8 +19,10 @@ produce a different format.
 """
 from zope.interface import Interface
 
+
 class ISource(Interface):
     """Simple base interface for all possible Wiki Page Source types."""
+
 
 class ISourceRenderer(Interface):
     """Object implementing this interface are responsible for rendering an
@@ -36,6 +38,7 @@ class ISourceRenderer(Interface):
 
     def render():
         """Renders the source into another format."""
+
 
 class IHTMLRenderer(ISourceRenderer):
     """Renders an ISource object to HTML."""

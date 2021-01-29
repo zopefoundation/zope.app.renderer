@@ -29,10 +29,12 @@ from zope.app.renderer.i18n import ZopeMessageFactory as _
 from zope.app.renderer.interfaces import ISource, IHTMLRenderer
 from zope.app.renderer import SourceFactory
 
+
 class IPlainTextSource(ISource):
     """Marker interface for a plain text source. Note that an implementation
     of this interface should always derive from unicode or behave like a
     unicode class."""
+
 
 PlainTextSourceFactory = SourceFactory(
     IPlainTextSource, _("Plain Text"), _("Plain Text Source"))

@@ -39,7 +39,6 @@ ReStructuredTextSourceFactory = SourceFactory(
     _("ReStructured Text (ReST) Source"))
 
 
-
 @implementer(IHTMLRenderer)
 @adapter(IReStructuredTextSource, IBrowserRequest)
 class ReStructuredTextToHTMLRenderer(BrowserView):
@@ -67,7 +66,6 @@ class ReStructuredTextToHTMLRenderer(BrowserView):
       <p>This is more source.</p>
       </div>
     """
-
 
     def render(self, settings_overrides=()):
         """See zope.app.interfaces.renderer.IHTMLRenderer
@@ -103,8 +101,8 @@ class ReStructuredTextToHTMLRenderer(BrowserView):
         """
         # default settings for the renderer
         overrides = {
-            'halt_level': 6, # don't stop for any errors
-            'report_level': 4, # only report severe errors
+            'halt_level': 6,  # don't stop for any errors
+            'report_level': 4,  # only report severe errors
             'input_encoding': 'unicode',
             'output_encoding': 'unicode',
             'initial_header_level': 3,
@@ -115,4 +113,6 @@ class ReStructuredTextToHTMLRenderer(BrowserView):
             writer_name='html',
             settings_overrides=overrides,
         )
-        return u''.join((parts['body_pre_docinfo'], parts['docinfo'], parts['body']))
+        return u''.join((parts['body_pre_docinfo'],
+                         parts['docinfo'],
+                         parts['body']))
