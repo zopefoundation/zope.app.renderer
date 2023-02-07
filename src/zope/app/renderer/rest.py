@@ -113,6 +113,6 @@ class ReStructuredTextToHTMLRenderer(BrowserView):
             writer_name='html',
             settings_overrides=overrides,
         )
-        return u''.join((parts['body_pre_docinfo'],
+        return ''.join((parts['body_pre_docinfo'],
                          parts['docinfo'],
                          parts['body']))

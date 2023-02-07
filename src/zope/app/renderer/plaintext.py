@@ -15,10 +15,7 @@
 """
 __docformat__ = 'restructuredtext'
 
-try:
-    from html import escape
-except ImportError:
-    from cgi import escape
+import html
 
 from zope.component import adapter
 from zope.interface import implementer
@@ -61,4 +58,4 @@ class PlainTextToHTMLRenderer(BrowserView):
 
     def render(self):
         "See zope.app.interfaces.renderer.IHTMLRenderer"
-        return escape(self.context, True).replace('\n', '<br />\n')
+        return html.escape(self.context, True).replace('\n', '<br />\n')

@@ -47,7 +47,7 @@ Foo2Factory = SourceFactory(IFoo2, 'Foo2', 'Foo2 Source')
 class SourceTypeVocabularyTest(PlacelessSetup, unittest.TestCase):
 
     def setUp(self):
-        super(SourceTypeVocabularyTest, self).setUp()
+        super().setUp()
         ztapi.provideUtility(FooFactory, IFactory, 'zope.source.Foo')
         ztapi.provideUtility(Foo2Factory, IFactory, 'zope.source.Foo2')
         self.vocab = SourceTypeVocabulary(None)

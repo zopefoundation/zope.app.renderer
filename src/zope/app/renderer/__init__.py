@@ -30,7 +30,7 @@ class Source(text_type):
 
 
 @implementer(IFactory)
-class SourceFactory(object):
+class SourceFactory:
     """Creates an ISource object."""
 
     def __init__(self, iface, title='', description=''):
