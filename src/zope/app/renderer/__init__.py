@@ -15,9 +15,13 @@
 
 """
 from zope.component.interfaces import IFactory
-from zope.interface import implementer, directlyProvides, Declaration
+from zope.interface import Declaration
+from zope.interface import directlyProvides
+from zope.interface import implementer
+
+from zope.app.renderer.interfaces import IHTMLRenderer  # noqa: F401 unused
 from zope.app.renderer.interfaces import ISource  # noqa: F401 import unused
-from zope.app.renderer.interfaces import IHTMLRenderer   # noqa: F401 unused
+
 
 try:
     text_type = unicode
