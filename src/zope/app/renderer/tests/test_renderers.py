@@ -14,8 +14,8 @@
 """Renderer Tests
 
 """
-import unittest
 import doctest
+import unittest
 from doctest import DocTestSuite
 
 

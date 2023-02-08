@@ -17,13 +17,15 @@
 """
 import unittest
 
+from zope.component.interfaces import IFactory
+from zope.component.testing import PlacelessSetup
+from zope.schema.interfaces import IVocabulary
+from zope.schema.interfaces import IVocabularyTokenized
+
 from zope import component as ztapi
 from zope.app.renderer import SourceFactory
 from zope.app.renderer.interfaces import ISource
 from zope.app.renderer.vocabulary import SourceTypeVocabulary
-from zope.component.interfaces import IFactory
-from zope.component.testing import PlacelessSetup
-from zope.schema.interfaces import IVocabulary, IVocabularyTokenized
 
 
 class IFoo(ISource):
@@ -47,7 +49,7 @@ Foo2Factory = SourceFactory(IFoo2, 'Foo2', 'Foo2 Source')
 class SourceTypeVocabularyTest(PlacelessSetup, unittest.TestCase):
 
     def setUp(self):
-        super(SourceTypeVocabularyTest, self).setUp()
+        super().setUp()
         ztapi.provideUtility(FooFactory, IFactory, 'zope.source.Foo')
         ztapi.provideUtility(Foo2Factory, IFactory, 'zope.source.Foo2')
         self.vocab = SourceTypeVocabulary(None)

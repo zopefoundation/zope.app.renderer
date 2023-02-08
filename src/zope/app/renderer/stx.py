@@ -20,14 +20,15 @@ import re
 
 from zope.component import adapter
 from zope.interface import implementer
-from zope.structuredtext.document import Document
-from zope.structuredtext.html import HTML
 from zope.publisher.browser import BrowserView
 from zope.publisher.interfaces.browser import IBrowserRequest
+from zope.structuredtext.document import Document
+from zope.structuredtext.html import HTML
 
-from zope.app.renderer.i18n import ZopeMessageFactory as _
-from zope.app.renderer.interfaces import ISource, IHTMLRenderer
 from zope.app.renderer import SourceFactory
+from zope.app.renderer.i18n import ZopeMessageFactory as _
+from zope.app.renderer.interfaces import IHTMLRenderer
+from zope.app.renderer.interfaces import ISource
 
 
 class IStructuredTextSource(ISource):

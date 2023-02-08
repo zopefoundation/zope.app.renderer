@@ -23,9 +23,10 @@ from zope.interface import implementer
 from zope.publisher.browser import BrowserView
 from zope.publisher.interfaces.browser import IBrowserRequest
 
-from zope.app.renderer.i18n import ZopeMessageFactory as _
-from zope.app.renderer.interfaces import ISource, IHTMLRenderer
 from zope.app.renderer import SourceFactory
+from zope.app.renderer.i18n import ZopeMessageFactory as _
+from zope.app.renderer.interfaces import IHTMLRenderer
+from zope.app.renderer.interfaces import ISource
 
 
 class IReStructuredTextSource(ISource):
@@ -113,6 +114,6 @@ class ReStructuredTextToHTMLRenderer(BrowserView):
             writer_name='html',
             settings_overrides=overrides,
         )
-        return u''.join((parts['body_pre_docinfo'],
-                         parts['docinfo'],
-                         parts['body']))
+        return ''.join((parts['body_pre_docinfo'],
+                        parts['docinfo'],
+                        parts['body']))
