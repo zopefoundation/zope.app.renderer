@@ -26,7 +26,7 @@ def read(*rnames):
 
 
 setup(name='zope.app.renderer',
-      version='5.0',
+      version='5.1.dev0',
       author='Zope Corporation and Contributors',
       author_email='zope-dev@zope.dev',
       description='Text Renderer Framework',
